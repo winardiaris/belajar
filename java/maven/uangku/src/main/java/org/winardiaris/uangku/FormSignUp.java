@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -40,8 +41,10 @@ public class FormSignUp extends javax.swing.JFrame {
         Tpassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         Bsignup = new javax.swing.JButton();
+        Bcancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Nama Lengkap");
 
@@ -56,6 +59,13 @@ public class FormSignUp extends javax.swing.JFrame {
         Bsignup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BsignupMouseClicked(evt);
+            }
+        });
+
+        Bcancel.setText("Batal");
+        Bcancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BcancelMouseClicked(evt);
             }
         });
 
@@ -78,6 +88,10 @@ public class FormSignUp extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Bsignup)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Bcancel))
                                     .addComponent(Tusername, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                                     .addComponent(Tpassword))))
                         .addContainerGap())
@@ -85,10 +99,6 @@ public class FormSignUp extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(124, 124, 124))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Bsignup)
-                .addGap(167, 167, 167))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +118,9 @@ public class FormSignUp extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(Tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(Bsignup)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bsignup)
+                    .addComponent(Bcancel))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -118,7 +130,9 @@ public class FormSignUp extends javax.swing.JFrame {
     private void BsignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsignupMouseClicked
         String realname = Trealname.getText();
         String username = Tusername.getText();
-        String password = Tpassword.getText();
+        String password_text = Tpassword.getText();
+        String password;
+        password = DigestUtils.md5Hex(password_text);
         String url = "http://localhost/uangku/?op=newuser&username="+username+"&password="+password+"&realname="+realname;
         
         getDataURL dataurl = new getDataURL();
@@ -126,7 +140,7 @@ public class FormSignUp extends javax.swing.JFrame {
             String data = dataurl.getData(url);
             System.out.println(data);
             
-            JOptionPane.showMessageDialog(this,"Berhasil","Informasi",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Berhasil, selamat begabung","Informasi",JOptionPane.INFORMATION_MESSAGE);
             FormSignIn f = new FormSignIn();
             f.setLocationRelativeTo(null);
             f.setVisible(true);
@@ -135,6 +149,13 @@ public class FormSignUp extends javax.swing.JFrame {
             Logger.getLogger(FormSignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BsignupMouseClicked
+
+    private void BcancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BcancelMouseClicked
+        FormSignIn f = new FormSignIn();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BcancelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,6 +194,7 @@ public class FormSignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bcancel;
     private javax.swing.JButton Bsignup;
     private javax.swing.JPasswordField Tpassword;
     private javax.swing.JTextField Trealname;

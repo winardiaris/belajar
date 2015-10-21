@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class FormSignIn extends javax.swing.JFrame {
     private Object password;
@@ -34,6 +35,7 @@ public class FormSignIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Masuk - uangku");
+        setResizable(false);
 
         Lusername.setText("Nama Pengguna");
 
@@ -50,6 +52,11 @@ public class FormSignIn extends javax.swing.JFrame {
         Bnew.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BnewMouseClicked(evt);
+            }
+        });
+        Bnew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BnewActionPerformed(evt);
             }
         });
 
@@ -116,7 +123,9 @@ public class FormSignIn extends javax.swing.JFrame {
 
     private void BloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloginMouseClicked
        String user = Tusername.getText();
-       String pass = Tpassword.getText();
+       String password_text = Tpassword.getText();
+        String pass;
+        pass = DigestUtils.md5Hex(password_text);
        String url = "http://localhost/uangku/?op=login&username="+user+"&password="+pass;
         
        getDataURL dataurl = new getDataURL();
@@ -135,6 +144,8 @@ public class FormSignIn extends javax.swing.JFrame {
                  fdata.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this,"Nama Pengguna / Kata Sandi Salah","Informasi",JOptionPane.ERROR_MESSAGE);
+                Tusername.setText("");
+                Tpassword.setText("");
             }
         } catch (IOException ex) {
             Logger.getLogger(FormSignUp.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,6 +158,10 @@ public class FormSignIn extends javax.swing.JFrame {
         f.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BnewMouseClicked
+
+    private void BnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BnewActionPerformed
         
     /**
      * @param args the command line arguments
