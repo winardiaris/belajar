@@ -1,13 +1,22 @@
 package com.winardi.aris.uangku;
 
-import javax.swing.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.awt.*;
 import java.awt.FlowLayout;
+/*import java.io.IOException;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;*/
+
+
 
 public class Login{
     public static void main(String[] args) {
@@ -19,8 +28,8 @@ public class Login{
 
         JLabel luser = new JLabel("Nama Pengguna");
         JLabel lpass = new JLabel("Kata Sandi");
-        JTextField tuser = new JTextField("Nama Pengguna");
-        JPasswordField tpass = new JPasswordField("Kata Sandi");
+        JTextField tuser = new JTextField();
+        JPasswordField tpass = new JPasswordField();
         JButton Bok = new JButton("Masuk");
 
         java.awt.FlowLayout layout = new FlowLayout();
@@ -33,7 +42,5 @@ public class Login{
         j.getContentPane().add(Bok);
 
         j.setVisible(true);
-
-
     }
 }

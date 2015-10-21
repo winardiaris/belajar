@@ -7,6 +7,13 @@
     <groupId>com.winardi.aris.uangku</groupId>
     <artifactId>uangku</artifactId>
     <version>1.0-SNAPSHOT</version>
-		<packaging>jar</packaging>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
