@@ -8,6 +8,7 @@ package org.winardiaris.uangku;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -125,6 +126,7 @@ public class FormSignUp extends javax.swing.JFrame {
             String data = dataurl.getData(url);
             System.out.println(data);
             
+            JOptionPane.showMessageDialog(this,"Berhasil","Informasi",JOptionPane.INFORMATION_MESSAGE);
             FormSignIn f = new FormSignIn();
             f.setLocationRelativeTo(null);
             f.setVisible(true);

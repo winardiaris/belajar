@@ -4,14 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 public class FormSignIn extends javax.swing.JFrame {
     private Object password;
@@ -22,49 +14,7 @@ public class FormSignIn extends javax.swing.JFrame {
     public FormSignIn() {
         initComponents();
     }
-    void login() throws IOException{
-         CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            String user = Tusername.getText();
-            String pass = Tpassword.getText();
-            HttpGet httpget = new HttpGet("http://localhost/uangku/?op=login&username="+user+"&password="+pass);
-
-            System.out.println("Executing request " + httpget.getRequestLine());
-
-            ResponseHandler<String> responseHandler;
-             responseHandler = new ResponseHandler<String>() {
-                 
-                 @Override
-                 public String handleResponse(
-                         final HttpResponse response) throws ClientProtocolException, IOException {
-                     int status = response.getStatusLine().getStatusCode();
-                     if (status >= 200 && status < 300) {
-                         HttpEntity entity = response.getEntity();
-                         return entity != null ? EntityUtils.toString(entity) : null;
-                     } else {
-                         throw new ClientProtocolException("Unexpected response status: " + status);
-                     }
-                 }
-             };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            System.out.println("----------------------------------------");
-            System.out.println(responseBody);
-            if("1".equals(responseBody)){
-                 JOptionPane.showMessageDialog(this,"Berhasil","Informasi",JOptionPane.INFORMATION_MESSAGE);
-                 this.dispose();
-                 
-                 FormData fdata = new FormData();
-                 fdata.setTitle(user);
-                 
-                 fdata.setLocationRelativeTo(null);
-                 fdata.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this,"Nama Pengguna / Kata Sandi Salah","Informasi",JOptionPane.ERROR_MESSAGE);
-            }
-        } finally {
-            httpclient.close();
-        }
-    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,10 +115,29 @@ public class FormSignIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloginMouseClicked
-        try { 
-            login();
+       String user = Tusername.getText();
+       String pass = Tpassword.getText();
+       String url = "http://localhost/uangku/?op=login&username="+user+"&password="+pass;
+        
+       getDataURL dataurl = new getDataURL();
+        try {
+            String data = dataurl.getData(url);
+            System.out.println(data);
+            
+            if("1".equals(data)){
+                 JOptionPane.showMessageDialog(this,"Berhasil","Informasi",JOptionPane.INFORMATION_MESSAGE);
+                 this.dispose();
+                 
+                 FormData fdata = new FormData();
+                 fdata.setTitle(user);
+                 
+                 fdata.setLocationRelativeTo(null);
+                 fdata.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this,"Nama Pengguna / Kata Sandi Salah","Informasi",JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException ex) {
-            Logger.getLogger(FormSignIn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormSignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BloginMouseClicked
 

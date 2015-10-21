@@ -8,14 +8,7 @@ package org.winardiaris.uangku;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,36 +22,7 @@ public class FormData extends javax.swing.JFrame {
     public FormData() {
         initComponents();
     }
-    String getData(String url) throws IOException{
-         CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            String user = this.getTitle();
-            
-            HttpGet httpget = new HttpGet(url);
-            System.out.println("Executing request " + httpget.getRequestLine());
-
-            ResponseHandler<String> responseHandler;
-             responseHandler = new ResponseHandler<String>() {
-                 
-                 @Override
-                 public String handleResponse(
-                         final HttpResponse response) throws ClientProtocolException, IOException {
-                     int status = response.getStatusLine().getStatusCode();
-                     if (status >= 200 && status < 300) {
-                         HttpEntity entity = response.getEntity();
-                         return entity != null ? EntityUtils.toString(entity) : null;
-                     } else {
-                         throw new ClientProtocolException("Unexpected response status: " + status);
-                     }
-                 }
-             };
-             
-            String responseURL = httpclient.execute(httpget, responseHandler);
-            return responseURL;
-        } finally {
-            httpclient.close();
-        }
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +37,7 @@ public class FormData extends javax.swing.JFrame {
         Luid = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         Brefresh = new javax.swing.JButton();
+        Bsignout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -87,10 +52,17 @@ public class FormData extends javax.swing.JFrame {
 
         Luid.setText("UID");
 
-        Brefresh.setText("Refresh");
+        Brefresh.setText("Segarkan");
         Brefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BrefreshMouseClicked(evt);
+            }
+        });
+
+        Bsignout.setText("Keluar");
+        Bsignout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BsignoutMouseClicked(evt);
             }
         });
 
@@ -108,23 +80,27 @@ public class FormData extends javax.swing.JFrame {
                         .addComponent(Lusername)
                         .addGap(18, 18, 18)
                         .addComponent(Lrealname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                        .addComponent(Bsignout))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Brefresh)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(442, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(Brefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Luid)
-                        .addComponent(Lusername)
-                        .addComponent(Lrealname))
-                    .addComponent(Brefresh, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Luid)
+                    .addComponent(Lusername)
+                    .addComponent(Lrealname)
+                    .addComponent(Bsignout))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -132,12 +108,14 @@ public class FormData extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         try {
+            getDataURL dataurl = new getDataURL();
+            
             String user = this.getTitle();
             String url = "http://localhost/uangku/?op=get&from_data=username&value_data="+user+"&select_field=uid&from_table=user";
-            String data = getData(url);
+            String data = dataurl.getData(url);
             
             String url2 = "http://localhost/uangku/?op=get&from_data=username&value_data="+user+"&select_field=realname&from_table=user";
-            String realname = getData(url2);
+            String realname = dataurl.getData(url2);
             
             
             System.out.println("----------------------------------------");
@@ -158,9 +136,11 @@ public class FormData extends javax.swing.JFrame {
 
     private void BrefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrefreshMouseClicked
        try {
+            getDataURL dataurl = new getDataURL();
+            
             String UID = Luid.getText();
             String url = "http://localhost/uangku/?op=viewdata&uid="+UID;
-            String data = getData(url);
+            String data = dataurl.getData(url);
             //JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
             //System.out.println(jsonObject.get("date").getAsString());
             System.out.println(data);
@@ -171,6 +151,18 @@ public class FormData extends javax.swing.JFrame {
             Logger.getLogger(FormData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BrefreshMouseClicked
+
+    private void BsignoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsignoutMouseClicked
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult;
+        dialogResult = JOptionPane.showConfirmDialog(this, "Keluar? ", "Konfirmasi", dialogButton);
+        if(dialogResult == 0) {
+            System.out.println("Logout");
+            this.dispose();
+        } else {
+            System.out.println("Cancel");
+        } 
+    }//GEN-LAST:event_BsignoutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -210,6 +202,7 @@ public class FormData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Brefresh;
+    private javax.swing.JButton Bsignout;
     private javax.swing.JLabel Lrealname;
     private javax.swing.JLabel Luid;
     private javax.swing.JLabel Lusername;
