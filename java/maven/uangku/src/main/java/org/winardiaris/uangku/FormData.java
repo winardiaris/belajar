@@ -51,8 +51,11 @@ public class FormData extends javax.swing.JFrame {
         Tdesc = new javax.swing.JTextArea();
         Tdate = new org.jdesktop.swingx.JXDatePicker();
         Bsave = new javax.swing.JButton();
+        Ljumlah = new javax.swing.JLabel();
+        Tvalue = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         Brefresh = new javax.swing.JButton();
+        Buserpreference = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -109,30 +112,42 @@ public class FormData extends javax.swing.JFrame {
             }
         });
 
+        Ljumlah.setText("Jumlah");
+
+        Tvalue.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Ttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(Tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(Ttoken, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(214, 214, 214))
+                        .addContainerGap(14, Short.MAX_VALUE)
+                        .addComponent(Ttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(Tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(386, 386, 386))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Bsave))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(Ttoken, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(182, 182, 182))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Bsave))
+                    .addComponent(Ljumlah)
+                    .addComponent(Tvalue, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,6 +162,10 @@ public class FormData extends javax.swing.JFrame {
                     .addComponent(Ttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(Ljumlah)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Tvalue, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Ttoken, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +175,7 @@ public class FormData extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Bsave)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Tambah", jPanel1);
@@ -180,12 +199,19 @@ public class FormData extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
+                .addContainerGap(322, Short.MAX_VALUE)
                 .addComponent(Brefresh)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Data", jPanel2);
+
+        Buserpreference.setText("Pengaturan");
+        Buserpreference.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BuserpreferenceMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,23 +229,26 @@ public class FormData extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Lrealname)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Buserpreference)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Bsignout)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addComponent(jTabbedPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Luid)
                     .addComponent(Lusername)
                     .addComponent(Lrealname)
-                    .addComponent(Bsignout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Bsignout)
+                    .addComponent(Buserpreference))
+                .addContainerGap())
         );
 
         pack();
@@ -274,7 +303,7 @@ public class FormData extends javax.swing.JFrame {
     private void BsignoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsignoutMouseClicked
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult;
-        dialogResult = JOptionPane.showConfirmDialog(this, "Kembali ke Form Masuk? ", "Konfirmasi", dialogButton);
+        dialogResult = JOptionPane.showConfirmDialog(this, "Yakin mau keluar? ", "Konfirmasi", dialogButton);
         if(dialogResult == 0) {
             System.out.println("Quit");
             this.dispose();
@@ -296,16 +325,50 @@ public class FormData extends javax.swing.JFrame {
         formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = Tdate.getDate();
         
+        String UID = Luid.getText();
         String type = Ttype.getSelectedItem().toString();
-        String date2 = formatter.format(date);
+        String converted_type;
+        String converted_date = formatter.format(date);
         String token = Ttoken.getText();
+        String value = Tvalue.getText();
         String desc =  Tdesc.getText();
         
-        System.out.println("type : "+type);
-        System.out.println("date : "+date2);
+        if("Debet".equals(type)){
+            converted_type = "in";
+        }
+        else{
+            converted_type = "out";
+        }
+        
+        System.out.println("type : "+converted_type);
+        System.out.println("date : "+converted_date);
+        System.out.println("value : "+value);
         System.out.println("token : "+token);
         System.out.println("desc : "+desc);
+        
+        String url = "http://localhost/uangku/?op=newdata&uid="+UID+"&date="+converted_date+"&token="+token+"&type="+converted_type+"&value="+value+"&desc="+desc;
+        String url_encoded = URLEncoder(url,"UTF-8");
+        
+        System.out.println(url_encoded);
+        getDataURL dataurl = new getDataURL();
+        String data;
+        try {
+            data = dataurl.getData(url_encoded);
+            System.out.println(data);
+        } catch (IOException ex) {
+            Logger.getLogger(FormData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_BsaveMouseClicked
+
+    private void BuserpreferenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuserpreferenceMouseClicked
+       this.dispose();
+       FormUserPreference fpref = new FormUserPreference();
+       fpref.setTitle(this.Luid.getText());
+       fpref.setLocationRelativeTo(null);
+       fpref.setVisible(true);
+    }//GEN-LAST:event_BuserpreferenceMouseClicked
 
     /**
      * @param args the command line arguments
@@ -347,6 +410,8 @@ public class FormData extends javax.swing.JFrame {
     private javax.swing.JButton Brefresh;
     private javax.swing.JButton Bsave;
     private javax.swing.JButton Bsignout;
+    private javax.swing.JButton Buserpreference;
+    private javax.swing.JLabel Ljumlah;
     private javax.swing.JLabel Lrealname;
     private javax.swing.JLabel Luid;
     private javax.swing.JLabel Lusername;
@@ -354,6 +419,7 @@ public class FormData extends javax.swing.JFrame {
     private javax.swing.JTextArea Tdesc;
     private javax.swing.JTextField Ttoken;
     private javax.swing.JComboBox Ttype;
+    private javax.swing.JTextField Tvalue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -364,4 +430,8 @@ public class FormData extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+
+    private String URLEncoder(String url, String utF8) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
