@@ -173,6 +173,7 @@ public class FormUserPreference extends javax.swing.JFrame {
     private void BcancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BcancelMouseClicked
        this.dispose();
        FormData fdata = new FormData();
+       fdata.setTitle(Tusername.getText());
        fdata.setLocationRelativeTo(null);
        fdata.setVisible(true);
     }//GEN-LAST:event_BcancelMouseClicked

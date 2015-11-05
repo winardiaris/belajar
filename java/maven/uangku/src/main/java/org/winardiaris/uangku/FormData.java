@@ -293,8 +293,11 @@ public class FormData extends javax.swing.JFrame {
             //System.out.println(jsonObject.get("date").getAsString());
             System.out.println(data);
             
-            
-            //System.out.println(data);
+            Ttype.enable(true);
+            Tdate.setEnabled(true);
+            Tvalue.setEnabled(true);
+            Tdesc.setEnabled(true);
+            Ttoken.setEnabled(true);
         } catch (IOException ex) {
             Logger.getLogger(FormData.class.getName()).log(Level.SEVERE, null, ex);
         }
